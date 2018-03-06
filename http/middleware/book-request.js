@@ -1,6 +1,6 @@
 const Book        = require('../../src/book/book');
 const connection  = require('../../database/knexConnection');
-const BookFactory = require('../../src/book/book-factory');
+const BookFactory = require('../../src/publisher/publisher-factory');
 
 let factory = new BookFactory();
 
