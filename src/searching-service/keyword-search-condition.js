@@ -19,7 +19,7 @@ class KeywordSearchCondition {
             .where(function () {
                 this.where('title', 'like', '%' + keyword + '%')
                     .orWhere('author', 'like', '%' + keyword + '%')
-            }).where({deleted_at: null});
+            }).where({'books.deleted_at': null});
     }
 }
 
