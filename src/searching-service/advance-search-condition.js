@@ -6,9 +6,10 @@ class AdvancedSearchCondition {
      * @param {string} author
      * @param {string} publisher
      */
-    constructor (title, author){
+    constructor (title, author, publisher){
         this.title = title;
         this.author = author;
+        this.publisher = publisher;
     }
 
     /**
@@ -19,7 +20,8 @@ class AdvancedSearchCondition {
     describe(sqlQuery) {
         return sqlQuery.where('author', 'like', '%' + this.author + '%')
             .where('title', 'like', '%' + this.title + '%')
-            .where({'books.deleted_at': null});
+            .where('publishers.name', 'like', '%'+ this.publisher + '%')
+            .where({'books.deleted_at': null})
     }
 }
 
