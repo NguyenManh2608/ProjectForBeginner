@@ -1,13 +1,12 @@
 const Publisher = require('./publisher');
 
 class PublisherFactory {
-
     /**
      *
      * @param publisherRaw
      * @return {Publisher}
      */
-    makeFromRequest (publisherRaw) {
+    makeFromDB (publisherRaw) {
         let publisher = new Publisher(publisherRaw.name);
         publisher.setId(publisherRaw.id);
         publisher.setAddress(publisherRaw.address);

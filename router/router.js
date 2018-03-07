@@ -5,10 +5,6 @@ const check = require('../http/middleware/index');
 
 let bookController = new BookController();
 
-/* GET home page. */
-router.get('/', function(req, res) {
-    res.render('index', { title: 'Express' });
-});
 
 
 router.get('/books', check.searchCondition, bookController.search);
