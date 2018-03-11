@@ -1,0 +1,10 @@
+body{
+    width: 900px;
+    margin:auto;
+}
+
+.body-left {
+    float: left;
+    width: 200px;
+    border: 5px #3affff;
+}

@@ -33,9 +33,11 @@ class BookController {
 
     search(request, response, next) {
         request.app.get('books.searcher').search(request.condition)
-            .then((results) => response.status(200).send(results.map(result => result.toJson())))
+            .then((results) => response.status(200).render('index.ejs',{data:results.map(result => result.toJson())}))
             .catch(next)
     }
+
+    //use render to upload data to home.ejs
 }
 
 module.exports = BookController;
