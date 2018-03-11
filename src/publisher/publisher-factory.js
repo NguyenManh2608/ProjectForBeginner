@@ -8,7 +8,7 @@ class PublisherFactory {
      */
     makeFromDB (publisherRaw) {
         let publisher = new Publisher(publisherRaw.name);
-        publisher.setId(publisherRaw.publisher_id);
+        publisher.setId(publisherRaw.id);
         publisher.setAddress(publisherRaw.address);
         publisher.setPhone(publisherRaw.phone);
         return publisher;
