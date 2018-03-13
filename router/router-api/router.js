@@ -7,7 +7,7 @@ let bookController = new BookController();
 
 router.get('/books', check.searchCondition, bookController.search);
 
-router.get('/book/:id', check.searchCondition, bookController.search);
+router.get('/book/:id', check.searchCondition, bookController.detail);
 
 router.post('/book', check.bookRequest, bookController.createBook);
 

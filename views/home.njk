@@ -26,7 +26,9 @@
     </form>
     <ul>
         {% for book in books %}
-       <a href="/detail/{{book.getId()}}"><li> {{book.getTitle()}}--{{book.getPublisher().getName()}}</li></a>
+        <li>
+            <a href="/book/{{book.getId()}}"> {{book.getTitle()}}--{{book.getPublisher().getName()}}</a>
+        </li>
         {% endfor %}
     </ul>
 </body>

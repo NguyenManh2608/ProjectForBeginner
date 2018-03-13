@@ -1,32 +1,21 @@
-class BookControllerApi {
+class BookController {
 
-    constructor() {
-
-    }
-
-    bookviews(request, response, next) {
-        request.app.get('books.searcher').search(request.condition)
-            .then(books => {response.render('home.njk', {books : books})
-            })
-            .catch(next)
-    }
-
-    detail(request, response, next) {
-        request.app.get('books.searcher').search(request.condition)
-            .then(books => {response.render('detail.njk', {books: books[0]})
-            })
-            .catch(next)
-    }
 
     search(request, response, next) {
         request.app.get('books.searcher').search(request.condition)
-            .then(books => {
-                response.status(200).render('home.njk', {books : books})
-            })
+            .then( books => response.render('home.njk', {books : books}))
             .catch(next)
-    };
+    }
 
-    save(request, response, next) {
+
+    detail(request, response, next) {
+        request.app.get('books.searcher').search(request.condition)
+            .then( books => response.render('detail.njk', {books: books[0]}))
+            .catch(next)
+    }
+
+
+    add(request, response, next) {
         let repo = request.app.get('books.repo');
         repo.add(request.book).then(books => {
             response.status(201).render('save.njk',{books: books});
@@ -35,7 +24,8 @@ class BookControllerApi {
         });
     }
 
-    save(request, response, next) {
+
+    edit(request, response, next) {
         let repo = request.app.get('books.repo');
         repo.edit(request.book).then(books => {
             response.render('save.njk', {books: books})
@@ -45,4 +35,4 @@ class BookControllerApi {
 
 }
 
-module.exports = BookControllerApi;
+module.exports = BookController;

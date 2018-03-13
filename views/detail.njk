@@ -4,8 +4,8 @@
     </head>
     <body>
         <h1>{{books.getTitle()}}</h1>
-       <a href="save.njk"><label >{{books.getAuthor()}}</label></a><br>
-       <a href="save.njk"><label >{{books.getPublisher().getName()}}</label></a><br>
-       <a href="save.njk"><label >{{books.getPrice()}}</label></a>
+      <small >{{books.getAuthor()}}</small> |
+      <small >{{books.getPublisher().getName()}}</small> |
+      <small >{{books.getPrice()}}</small>
     </body>
 </html>
