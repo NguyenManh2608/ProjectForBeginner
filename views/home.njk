@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Books Home</title>
+</head>
+<body>
+    <form action="/search-basic" method="get">
+        <input type="text" name = "keyword">
+        <input type="submit">
+    </form>
+    <h4>Search Advance</h4>
+    <form action="/search-advance" method="get">
+        <label for="title">Title:</label><input type = "text" name = "title" id="title">
+        <label for="author">Author: </label><input type = "text" name = "author" id ="author">
+        <label for="publisher">Publisher: </label><input type = "text" name = "publisher" id="publisher">
+        <input type="submit" value="search">
+    </form>
+    <ul>
+        {% for book in books %}
+       <a href="/detail/{{book.getId()}}"><li> {{book.getTitle()}}--{{book.getPublisher().getName()}}</li></a>
+        {% endfor %}
+    </ul>
+</body>
+</html>

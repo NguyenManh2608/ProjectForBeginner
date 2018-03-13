@@ -16,6 +16,7 @@
     "express": "*",
     "knex": "^0.14.4",
     "mysql": "*",
+    "nunjucks": "^3.1.2",
     "semantic-ui": "^2.3.0"
   }
 }

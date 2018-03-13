@@ -5,12 +5,6 @@ const check = require('../http/middleware/index');
 
 let bookController = new BookController();
 
-
-router.get('/', (req, res) => {
-    res.render('home');
-    res.end();
-});
-
 router.get('/books', check.searchCondition, bookController.search);
 
 router.get('/book/:id', check.searchCondition, bookController.search);

@@ -55,6 +55,14 @@ class Publisher {
     setPhone (phone) {
         this.phone = phone;
     }
+
+    setName(name) {
+        this.name = name;
+    }
+
+    getName(name) {
+        return this.name;
+    }
 }
 
 module.exports = Publisher;

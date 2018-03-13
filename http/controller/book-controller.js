@@ -5,10 +5,9 @@ class BookController {
     }
 
     createBook(request, response, next) {
-        // console.log(request.book);
         let repo = request.app.get('books.repo');
-        repo.add(request.book).then( () => {
-            response.status(201).send({message: "Success!"});
+        repo.add(request.book).then(results => {
+            response.status(201).render('create',{books: results.map(results)});
         }).catch( (err) => {
             next(err);
         });
@@ -30,14 +29,14 @@ class BookController {
         });
     }
 
-
     search(request, response, next) {
         request.app.get('books.searcher').search(request.condition)
-            .then((results) => response.status(200).render('index.ejs',{data:results.map(result => result.toJson())}))
+            .then(result => {
+                response.status(200).send(result.toJson());
+            })
             .catch(next)
-    }
+    };
 
-    //use render to upload data to home.ejs
 }
 
 module.exports = BookController;
