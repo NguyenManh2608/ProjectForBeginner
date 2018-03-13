@@ -3,15 +3,25 @@
     <title>Books Home</title>
 </head>
 <body>
+
     <form action="/search-basic" method="get">
         <input type="text" name = "keyword">
         <input type="submit">
     </form>
     <h4>Search Advance</h4>
     <form action="/search-advance" method="get">
-        <label for="title">Title:</label><input type = "text" name = "title" id="title">
-        <label for="author">Author: </label><input type = "text" name = "author" id ="author">
-        <label for="publisher">Publisher: </label><input type = "text" name = "publisher" id="publisher">
+        <div>
+            <label for="title">Title:</label>
+            <input type = "text" name = "title" id="title">
+        </div>
+        <div>
+            <label for="author">Author: </label>
+            <input type = "text" name = "author" id ="author">
+        </div>
+        <div>
+            <label for="publisher">Publisher: </label>
+            <input type = "text" name = "publisher" id="publisher">
+        </div>
         <input type="submit" value="search">
     </form>
     <ul>

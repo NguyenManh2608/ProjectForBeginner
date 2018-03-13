@@ -7,6 +7,12 @@ module.exports = (req, res, next) => {
     req.condition = makeCondition(req);
     next();
 };
+
+module.exports =function (request, response, next) {
+    request.condition = new IdSearchCondition(request.params.id);
+    next();
+};
+
 function makeCondition(request) {
     if(request.path === '/search-advance') {
         return new AdvanceSearchCondition(request.query.title, request.query.author, request.query.publisher);
