@@ -17,7 +17,7 @@ router.get("/title", function (req, res, next) {
 
 router.get('/books', check.searchCondition, bookController.search);
 
-router.get('/book/:id',check.searchCondition, bookController.detail);
+router.get('/book',check.searchCondition, bookController.detail);
 
 router.get('/search-advance', check.searchCondition, bookController.search);
 

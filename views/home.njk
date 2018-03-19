@@ -1,113 +1,136 @@
 <html>
 <head>
-    <title>Books Home</title>
-    <meta charset = "UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-        $(document).ready( function () {
-            function A(url, method, data) {
-                return $.ajax({
-                    url : url,
-                    method: method,
-                    data: data
-                })
-            }
-
-            $("#get").click(() => {
-                A("/books", "GET").then(value => console.log(value))
-            });
-
-            $("#add").click(function () {
-                A("/save","POST", {
-                    title: $("#title").val(),
-                    author:$("#author").val(),
-                    publisher_id: $("#publisher").val(),
-                    price : $("#price").val()
-                })
-            });
-
-            $("#edit").click(function () {
-                A("/edit","put", {
-                    id : $("#id").val(),
-                    title: $("#title").val(),
-                    author:$("#author").val(),
-                    publisher_id: $("#publisher").val(),
-                    price : $("#price").val()
-                })
-            });
-
-            $("#delete").click(function () {
-                A("/delete","delete", {
-                    id : $("#id").val()
-                })
-            });
-
-            $("#search-basic").click(function () {
-                A("/search-basic","get", {
-                    keyword: $("#keyword").val()
-                }).then(value => {
-                    console.log(value);
-                });
-            });
-
-            $("#search-advance").click(function () {
-                A("/search-advance", "get", {
-                    title: $("#title").val(),
-                    author: $("#author").val(),
-                    publisher: $("#publisher").val()
-                }).then(value => {
-                    console.log(value);
-                });
-            });
-
-            $("#title").keyup(function () {
-                A("/title","get", {
-                    title: $("#title").val()
-                }).then(value => {
-                    if(!value.length) {
-                        $("#check").text("")
-                    }else {
-                        $("#check").text("Error")
-                    }
-                })
-            })
-
+<title>Books Home</title>
+<meta charset = "UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready( function () {
+    function renderBook(url, method, data) {
+        return $.ajax({
+            url     : url,
+            method  : method,
+            data    : data
         });
+    }
+    $("#get_all").click(()=>{
+       renderBook("/books","GET").then(value => {
+           console.log(value);});
+    });
 
-    </script>
+    $("#get").click(() => {
+        renderBook("/title", "GET",{
+            title: $("#title").val()
+        }).then(value => console.log(value))
+    });
+
+    $("#add").click(() => {
+        renderBook("/save","POST", {
+            title: $("#title").val(),
+            author:$("#author").val(),
+            publisher_id: $("#publisher").val(),
+            price : $("#price").val()
+        });
+    });
+
+    $("#edit").click(() => {
+        renderBook("/edit","put", {
+            id          : $("#id").val(),
+            title       : $("#title").val(),
+            author      : $("#author").val(),
+            publisher_id: $("#publisher").val(),
+            price       : $("#price").val()
+        });
+    });
+
+    $("#delete").click(() => {
+        renderBook("/delete","delete", {
+            id : $("#id").val()
+        });
+    });
+
+    $("#search-basic").click(() => {
+        renderBook("/search-basic","get", {
+            keyword: $("#keyword").val()
+        }).then(value => {
+            console.log(value);
+        });
+    });
+
+    $("#search-advance").click(() => {
+        renderBook("/search-advance", "get", {
+            title       : $("#title").val(),
+            author      : $("#author").val(),
+            publisher   : $("#publisher").val()
+        }).then(value => {
+            console.log(value);
+        });
+    });
+
+    $("#title").keyup(() => {
+        renderBook("/title","get", {
+            title   : $("#title").val()
+        }).then(value => {
+            if(!value.length) {
+                $("#check").text("")
+            }else {
+                $("#check").text("Error")
+            }
+        });
+    });
+});
+</script>
 </head>
 <body>
+<nav>
 <button type="submit" id="get">GET</button>
-<button type="submit" id="add">Add</button>
-<button type="submit" id="edit">Edit</button>
-<button type="submit" id="delete">delete</button>
-    <div>
-        <label for  = "id">ID:</label>
-        <input name = "id" id= "id">
-    </div>
-    <div>
-        <label for  = "title">Title:</label>
-        <input name = "title" id= "title"> <label id ="check"></label>
-    </div>
-    <div>
-        <label for  = "author">Author: </label>
-        <input name = "author" id = "author">
-    </div>
-    <div>
-        <label for  = "publisher">Publisher: </label>
-        <input name = "publisher" id = "publisher">
-    </div>
-    <div>
-        <label for  = "price">Price: </label>
-        <input name = "price" id = "price" type="number">
-    </div>
-    <div>
+<button type="submit" id="create">Create</button>
+<button type="submit" id="update">Update</button>
+<button type="submit" id="delete">Delete</button>
+<button type="submit" id="get_all">GET ALL</button>
+
+<br><br>
+    <!--<form hidden id="editor">-->
+        <div class="id">
+            <label for  = "id">ID:</label>
+            <input name = "id" id= "id">
+        </div>
+        <form id="adder">
+            <br><label for  = "title">Title:</label>
+                <input name = "title" id= "title"> <label id ="check"></label>
+
+                <label for  = "author">Author: </label>
+                <input name = "author" id = "author">
+            <br><br><label for="price">Price: </label>
+                <input name = "price" id = "price" type="number">
+                <label for  = "publisher">Publisher: </label>
+                <input name = "publisher" id = "publisher">
+                <button id="add"> ADD </button>
+            <script>
+                $("#create").click(function () {
+                    $("#adder").toggle();
+                })
+            </script>
+        </form>
+        <button id="edit">Edit</button>
+        <script>
+            $("#update").click(function () {
+                $("#editor").toggle();
+            })
+        </script>
+    <!--</form>-->
+    <br>
+    <button id="search">Search</button>
+    <form hidden id="searcher">
+        <br>
         <input  id="keyword" placeholder="Keyword">
         <button type="submit" id="search-basic">Search Basic</button>
-    </div>
-    <div>
         <button id ="search-advance">Search Advance</button>
-    </div>
-
+    </form>
+    <script>
+        $("#search").click(function () {
+            $("#searcher").toggle();
+        })
+    </script>
+</nav>
 </body>
 </html>
