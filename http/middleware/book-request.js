@@ -5,7 +5,7 @@ let bookFactory   = new BookFactory();
 module.exports = function (req, res, next) {
     bookFactory.make(req.body)
     .then( book => {
-            book.setId(req.params.id);
+            book.setId(req.body.id);
             req.book = book;
             next();
         });

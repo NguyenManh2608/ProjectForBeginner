@@ -6,6 +6,7 @@ const index          = require('./router/router-book/index');
 const BookRepository = require('./src/book/book-repository');
 const BookFactory    = require('./src/book/book-factory');
 const Searcher       = require('./src/searching-service/searcher');
+const PublisherProvider = require('./src/publisher/publisher-provider');
 const nunjucks       = require('nunjucks');
 
 let app            = express();
@@ -19,8 +20,9 @@ app.set('views', (__dirname+'/views'));
 app.use(express.static(path.join('public')));
 app.set('books.repo', new BookRepository(knex));
 app.set('books.searcher', new Searcher(knex, new BookFactory()));
+app.set('publisher.provider', new PublisherProvider(knex));
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(index);

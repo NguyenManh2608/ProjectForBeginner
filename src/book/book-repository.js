@@ -18,10 +18,10 @@ class BookRepository{
      */
     add(book) {
         return this.connection('books').insert({
-            title: book.getTitle(),
-            author: book.getAuthor(),
+            title       : book.getTitle(),
+            author      : book.getAuthor(),
             publisher_id: book.getPublisher().getId(),
-            price: book.getPrice()
+            price       : book.getPrice()
         });
     }
 
@@ -31,16 +31,15 @@ class BookRepository{
      * @return {Promise <void>}
      */
     edit(book) {
-        return this.connection('books').update({
-            title: book.getTitle(),
-            author: book.getAuthor(),
-            publisher_id: book.getPublisher().getId(),
-            price: book.getPrice()
-        }).where({
-            id: book.getId()
-        });
+        return this.connection('books')
+        .update({
+            title        : book.getTitle(),
+            author       : book.getAuthor(),
+            publisher_id : book.getPublisher().getId(),
+            price        : book.getPrice()})
+        .where({
+            id           : book.getId()});
     }
-
 
     /**
      *
@@ -48,13 +47,13 @@ class BookRepository{
      * @return {Promise <void>}
      */
     remove(id) {
-        return this.connection('books').update({
-            deleted_at: new Date().toLocaleString()
-        }).where({
-            id: id
+        return this.connection('books')
+        .update({
+            deleted_at  : new Date().toLocaleString()})
+        .where({
+            id  : id
         });
     }
-
 
 }
 

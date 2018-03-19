@@ -24,6 +24,7 @@ class BookFactory{
     makeFromDB(bookRaw) {
         let book = this.makeFromRequest(bookRaw);
         let publisher = publisherFactory.makeFromDB(bookRaw);
+        publisher.setId(bookRaw.publisher_id);
         book.setPublisher(publisher);
         return book;
     }

@@ -3,25 +3,28 @@
         <title>Books</title>
     </head>
     <body>
-        <form action="home.njk" method="post">
+        <form action = "/save" method = "post" role="form">
             <div>
-                <label for="title">Title: </label>&nbsp;&nbsp;&nbsp;
-                <input id="title" type="text" name="title">
+                <label for = "title">Title: </label>
+                <input id= "title" name = "title">
             </div>
             <div>
-                <label for="author">Author: </label>&nbsp;&nbsp;
-                <input type="text" id="author" name = "author">
+                <label for = "author">Author: </label>
+                <input id = "author" name = "author">
             </div>
+                Publisher:
+            <select name="publisher_id" id="publisher">
+                    {% for publisher in publishers %}
+                    <option value= "{{publisher.getId()}}">
+                        {{publisher.getName()}}
+                    </option>
+                    {% endfor%}
+            </select>
             <div>
-                <label for="publisher">Publisher: </label>
-                <input type="text" id="publisher" name = "publisher">
+                <label for = "price"> Price: </label>
+                <input  type = "number" id = "price" name = "price">
             </div>
-            <div>
-                <label for="price"> Price: </label> &nbsp;&nbsp;
-                <input type="text"  id="price" name = "price">
-            </div>
+            <input type="submit" value = "Send">
         </form>
     </body>
-
-
 </html>

@@ -3,10 +3,9 @@ class BookController {
 
     search(request, response, next) {
         request.app.get('books.searcher').search(request.condition)
-            .then( books => response.render('home.njk', {books : books}))
+            .then( books => response.json(books))
             .catch(next)
     }
-
 
     detail(request, response, next) {
         request.app.get('books.searcher').search(request.condition)
@@ -18,19 +17,35 @@ class BookController {
     add(request, response, next) {
         let repo = request.app.get('books.repo');
         repo.add(request.book).then(books => {
-            response.status(201).render('save.njk',{books: books});
-        }).catch( (err) => {
-            next(err);
-        });
+            response.render('save.njk', {book: books[0]});
+        })
+    .catch(next)
     }
-
 
     edit(request, response, next) {
         let repo = request.app.get('books.repo');
-        repo.edit(request.book).then(books => {
-            response.render('save.njk', {books: books})
+        repo.edit(request.book).then(() => {
+            response.json({message: "Success"});
         })
-        .catch(next);
+    .catch(next)
+    }
+
+
+    renderEdit(request, response, next) {
+        let booksPromise = request.app.get('books.searcher').search(request.condition);
+        let publishersPromise = request.app.get('publisher.provider').provideAll();
+        Promise.all([booksPromise, publishersPromise]).then( value => {
+            response.render('save.njk', {book: value[0][0], publishers: value[1]})
+        }).catch(next)
+
+    }
+
+    remove(request, response, next) {
+        let repo = request.app.get('books.repo');
+        repo.remove(request.body.id).then(books => {
+            response.render('home.njk', {book: books});
+            // response.alter("Success");
+        }).catch(next);
     }
 
 }
