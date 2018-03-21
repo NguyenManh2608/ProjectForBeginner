@@ -19,5 +19,8 @@
     "mysql": "*",
     "nunjucks": "^3.1.2",
     "semantic-ui": "^2.3.0"
+  },
+  "devDependencies": {
+    "ws": "3.3.2"
   }
 }

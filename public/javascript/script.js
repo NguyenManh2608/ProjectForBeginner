@@ -1,33 +1,25 @@
 $(document).ready( function () {
 
-    function renderBooks(url, method, data) {
-        return $.ajax({
-            url     : url,
-            method  : method,
-            data    : data
-        });
-    }
-
-    function listBook(books) {
+    function renderBook(books) {
         let template = $('#book-template').html();
         let resultHTML = books.map(function (book) {
-            return template.replace(':bookName:', book.title).replace(':bookAuthor:', book.publisher);
+            return template.replace(':bookName:', book.title).replace(':bookAuthor:', book.author);
         }).join('');
         $('#book-list').html(resultHTML);
     }
 
     $("#get-all").click(()=>{
-        renderBooks("/books","GET").then(listBook);
+        $.ajax("/books","GET").then(renderBook);
     });
 
     $("#get").click(() => {
-        renderBooks("/title", "GET",{
+        $.ajax("/title", "GET",{
             title: $("#title").val()
-        }).then(listBook)
+        }).then(renderBook)
     });
 
     $("#edit").click(() => {
-        renderBooks("/edit", "put", {
+        $.ajax("/edit", "put", {
             id          : $("#id").val(),
             title       : $("#title").val(),
             author      : $("#author").val(),
@@ -37,7 +29,7 @@ $(document).ready( function () {
     });
 
     $("#add").click(() => {
-        renderBooks('/save', 'post', {
+        $.ajax('/save', 'post', {
             title       : $("#title").val(),
             author      : $("#author").val(),
             publisher_id: $("#publisher").val(),
@@ -46,7 +38,7 @@ $(document).ready( function () {
     });
 
     $("#delete").click(() => {
-        renderBooks('/delete', 'delete', {
+        $.ajax('/delete', 'delete', {
                 id: $("#id").val()
         })
     });
@@ -54,7 +46,7 @@ $(document).ready( function () {
     $('#search').change(() => {
         $.get('/search-basic', {
             keyword: $('#search').val(),
-        }).then(listBook);
+        }).then(renderBook);
     });
 
     $('#search-advance').change(() => {
@@ -62,7 +54,7 @@ $(document).ready( function () {
             title       : $("#title").val(),
             author      : $('#author').val(),
             publisher_id: $("#publisher").val()
-        }).then(listBook);
+        }).then(renderBook);
     });
 });
 
