@@ -1436,7 +1436,7 @@ $.fn.form = function(parameters) {
               if(!settings.inline) {
                 module.add.errors(formErrors);
               }
-              // prevent ajax submit
+              // prevent javascript submit
               if($module.data('moduleApi') !== undefined) {
                 event.stopImmediatePropagation();
               }
@@ -20107,7 +20107,7 @@ $.api = $.fn.api = function(parameters) {
 
           requestSettings.url = settings.base + url;
 
-          // look for jQuery ajax parameters in settings
+          // look for jQuery javascript parameters in settings
           ajaxSettings = $.extend(true, {}, settings, {
             type       : settings.method || settings.type,
             data       : data,
@@ -20536,7 +20536,7 @@ $.api = $.fn.api = function(parameters) {
             var
               xhr
             ;
-            // ajax request promise
+            // javascript request promise
             xhr = $.ajax(ajaxSettings)
               .always(module.event.xhr.always)
               .done(module.event.xhr.done)
@@ -20964,7 +20964,7 @@ $.api.settings = {
   // whether to throttle first request or only repeated
   throttleFirstRequest : true,
 
-  // standard ajax settings
+  // standard javascript settings
   method            : 'get',
   data              : {},
   dataType          : 'json',

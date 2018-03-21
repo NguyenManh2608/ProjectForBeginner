@@ -9,7 +9,7 @@ const Searcher       = require('./src/searching-service/searcher');
 const PublisherProvider = require('./src/publisher/publisher-provider');
 const nunjucks       = require('nunjucks');
 
-let app            = express();
+let app = express();
 
 nunjucks.configure('views', {
     autoescape: true,
@@ -17,7 +17,7 @@ nunjucks.configure('views', {
 });
 
 app.set('views', (__dirname+'/views'));
-app.use(express.static(path.join('public')));
+app.use(express.static('public'));
 app.set('books.repo', new BookRepository(knex));
 app.set('books.searcher', new Searcher(knex, new BookFactory()));
 app.set('publisher.provider', new PublisherProvider(knex));

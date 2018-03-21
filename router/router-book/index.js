@@ -17,17 +17,17 @@ router.get("/title", function (req, res, next) {
 
 router.get('/books', check.searchCondition, bookController.search);
 
-router.get('/book',check.searchCondition, bookController.detail);
+router.get('/book', check.searchCondition, bookController.detail);
 
 router.get('/search-advance', check.searchCondition, bookController.search);
 
 router.get('/search-basic', check.searchCondition, bookController.search);
 
-router.get('/save',  check.searchCondition, bookController.renderEdit);
+router.get('/save', check.searchCondition, bookController.renderEdit);
 
-router.post('/save',check.bookRequest,bookController.add);
+router.post('/save', check.bookRequest, bookController.add);
 
-router.put('/edit',check.bookRequest,bookController.edit);
+router.put('/edit', check.bookRequest, bookController.edit);
 
 router.delete('/delete', bookController.remove);
 

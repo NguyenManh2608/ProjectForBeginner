@@ -938,7 +938,7 @@ $.fn.form = function(parameters) {
               if(!settings.inline) {
                 module.add.errors(formErrors);
               }
-              // prevent ajax submit
+              // prevent javascript submit
               if($module.data('moduleApi') !== undefined) {
                 event.stopImmediatePropagation();
               }
