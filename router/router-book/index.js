@@ -29,7 +29,7 @@ router.post('/save', check.bookRequest, bookController.add);
 
 router.put('/book/:id', check.bookRequest, bookController.edit);
 
-router.delete('/delete', bookController.remove);
+router.delete('/delete/:id',bookController.remove);
 
 router.get('/detail/:id',check.searchCondition, bookController.renderEdit);
 

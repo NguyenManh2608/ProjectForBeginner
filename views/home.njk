@@ -17,34 +17,29 @@
 </div>
 </section>
 <div class="container-fluid">
-
-    <section id="all">
-
-        <ul id="book-list" class="list-group">
-            <li id="book-view" hidden ></li>
-        </ul>
-    </section>
-    <script>
-        $("#edit").change(() => {
-            $("#edit-form").toggle();
-        });
-    </script>
-
-    <script id="book-template" type="text/html">
-        <ul class="list-group">
-            <li class="list-group-item list-group-item-action" id="get-detail" >
-                <a href="#" id="show-detail" role="button" aria-expanded="false">:bookName:
-                </a>
-
-                <p>Author:    :bookAuthor:</p>
-                <p>Publisher: :bookPublisher:</p>
-                <p>Price:     :bookPrice:</p>
-                <p>Phone:     :publisherPhone:</p>
-                <a href="/detail/:id:" id="edit" class="btn btn-primary">Edit</a>
-                <button id="delete" class="btn btn-danger">Delete</button>
-            </li>
-        </ul>
-    </script>
-
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel-body">
+            <section id="all">
+                <ul id="book-list" class="list-group">
+                    <li id="book-view" hidden ></li>
+                </ul>
+            </section>
+            <script id="book-template" type="text/html">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-action" id="get-detail" >
+                        <a href="#" id="show-detail" role="button" aria-expanded="false">:bookName:
+                        </a>
+                        <p>Author:    :bookAuthor:</p>
+                        <p>Publisher: :bookPublisher:</p>
+                        <p>Price:     :bookPrice:</p>
+                        <p>Phone:     :publisherPhone:</p>
+                        <a href="/detail/:id:" id="edit" class="btn btn-primary">Edit</a>
+                        <a href="/delete/:id" class="btn btn-danger">Delete</a>
+                    </li>
+                </ul>
+            </script>
+        </div>
+    </div>
 </div>
 {% endblock %}
+<script src="/javascript/script.js"></script>

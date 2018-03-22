@@ -41,9 +41,8 @@ class BookController {
 
     remove(request, response, next) {
         let repo = request.app.get('books.repo');
-        repo.remove(request.body.id).then(books => {
-            response.render('home.njk', {book: books});
-            // response.alter("Success");
+        repo.remove(request.params.id).then(() => {
+            response.redirect('/');
         }).catch(next);
     }
 }

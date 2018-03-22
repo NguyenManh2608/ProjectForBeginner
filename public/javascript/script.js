@@ -13,7 +13,6 @@ $(document).ready( function () {
         $('#book-list').html(resultHTML);
     }
 
-    //load page home
     $.ajax('/books').then(renderBook);
 
     $(document).on("click", "#edit", function () {
@@ -26,13 +25,14 @@ $(document).ready( function () {
         $('#all').html(template);
     }
 
-    $("#publisher").change(function () {
-
+    $('#search').submit(function (e) {
+       e.preventDefault();
     });
 
-    $('#search').change(() => {
+    $('#input-search').keyup(function () {
+        let $this = $(this);
         $.get('/search-basic', {
-            keyword: $('#search').val(),
+            keyword: $this.val(),
         }).then(renderBook);
     });
 
@@ -44,10 +44,6 @@ $(document).ready( function () {
         }).then(renderBook);
     });
 
-    $("#delete").change(() => {
-        $.ajax('/delete').then(renderBook)
-    });
-
     $("#edit").click(() => {
         $.ajax('book/:id',{
             method: "put",
@@ -57,7 +53,7 @@ $(document).ready( function () {
                 publisher: $("#publisher").val() ,
                 price: $("#price").val()
             }
-        })
+        });
     })
 });
 

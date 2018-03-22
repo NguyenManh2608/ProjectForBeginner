@@ -34,4 +34,7 @@ function makeCondition(request) {
     else if(request.path.toString().startsWith('/detail')) {
         return new IdSearchCondition(request.params.id);
     }
+    else if(request.path.toString().startsWith('delete')){
+        return new IdSearchCondition(request.params.id)
+    }
 }
