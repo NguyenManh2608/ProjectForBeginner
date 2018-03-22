@@ -27,8 +27,10 @@ router.get('/save', check.searchCondition, bookController.renderEdit);
 
 router.post('/save', check.bookRequest, bookController.add);
 
-router.put('/edit', check.bookRequest, bookController.edit);
+router.put('/book/:id', check.bookRequest, bookController.edit);
 
 router.delete('/delete', bookController.remove);
+
+router.get('/detail/:id',check.searchCondition, bookController.renderEdit);
 
 module.exports = router;

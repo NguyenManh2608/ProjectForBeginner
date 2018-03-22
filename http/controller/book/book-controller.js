@@ -9,7 +9,7 @@ class BookController {
 
     detail(request, response, next) {
         request.app.get('books.searcher').search(request.condition)
-            .then( books => response.render('detail.njk', {book: books[0]}))
+            .then(books => response.json(books))
             .catch(next)
     }
 
@@ -24,12 +24,11 @@ class BookController {
     edit(request, response, next) {
         let repo = request.app.get('books.repo');
         repo.edit(request.book)
-            .then(books => {
-                response.json(books)
+            .then(() => {
+                response.json({message:"Success"})
             })
             .catch(next)
     }
-
 
     renderEdit(request, response, next) {
         let booksPromise = request.app.get('books.searcher').search(request.condition);
@@ -47,7 +46,6 @@ class BookController {
             // response.alter("Success");
         }).catch(next);
     }
-
 }
 
 module.exports = BookController;

@@ -30,7 +30,6 @@ class PublisherProvide {
         return this.connection.select().from('publishers')
             .then( publisherRowsData => {
                 let publishers;
-
                 publishers = publisherRowsData.map( publisherRaw => publisherFactory.makeFromDB(publisherRaw));
                 return publishers;
             });

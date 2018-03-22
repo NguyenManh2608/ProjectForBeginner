@@ -2,80 +2,84 @@
 <head>
     <title>Books Home</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/javascript/script.js"></script>
 </head>
 <body>
-
-<header class="navbar navbar-expland-lg navbar-light bg-light">
-    <a href="/" class="navbar-brand">Books</a>
-    <ul class="nav justify-content-end">
-        <li id="get"><a href="#" class="nav-link">Get Title</a></li>
-        <li id="add"><a href="#" class="nav-link">Add</a></li>
-        <li id="edit"><a href="#" class="nav-link">Edit</a></li>
-        <li id="delete"><a href="#" class="nav-link">Delete</a></li>
-        <li id="get-all"><a href="#" class="nav-link">Get All</a></li>
-        <li id="search-advance"><a href="#" class="nav-link">Search advance</a></li>
-    </ul>
-    <div class="row">
-        <div class="col-lg-10">
-            <div class="input-group-prepend">
-                <input type="text" class="form-control" aria-label="Default"
-                       aria-describedby="inputGroup-s" id="search" placeholder="Searching for">
-            </div>
+<header>
+    <nav class="navbar navbar-static-top navbar-default">
+        <div class="container-fluid">
+            <a href="/" class="navbar navbar-brand">Books</a>
+                <ul class="nav justify-content-end">
+                    <li id="search-advance"><a href="#" class="nav-link">Search advance</a></li>
+                </ul>
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="input-group-prepend">
+                            <input type="text" class="form-control" aria-label="Default"
+                                   aria-describedby="inputGroup-s" id="search" placeholder="Searching for">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-md-offset-2">
+                        <span class="btn glyphicon glyphicon-search"></span>
+                    </div>
+                </div>
         </div>
-        <div class="col-md-2">
-            <span class="btn glyphicon glyphicon-search"></span>
-        </div>
-    </div>
+    </nav>
 </header>
 <nav class="navbar navbar-expland-lg navbar-light bg-light">
     <div class="container-fluid">
-        <form>
-            <div class="form-group col-md-6">
-                <div class="id">
-                    <label for="id">ID:</label>
-                    <input name="id" id="id" class="form-control">
-                </div>
+        <form id="form-condition">
+            <div class="form-group col-md-5">
+                    <label for="title">Title:</label>
+                    <input name="title" id="title" class="form-control">
             </div>
-            <div class="form-group col-md-6">
-                <label for="title">Title:</label>
-                <input name="title" id="title" class="form-control"> <label id="check"></label>
+            <div class="form-group col-md-5">
+                <label for="publisher">Publisher:</label>
+                <input name="publisher" id="publisher" class="form-control"> <label id="check"></label>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-5">
                 <label for="author">Author: </label>
                 <input name="author" id="author" class="form-control">
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-5">
                 <label for="price">Price: </label>
                 <input name="price" id="price" type="number" class="form-control">
             </div>
-            <div class="form-group col-md-6">
-                <label for="publisher">Publisher: </label>
-                <input name="publisher" id="publisher" class="form-control">
+            <div class="form-group col-md-2">
+                <br>
+                <button id="add" class="btn btn-success">Add</button>
             </div>
         </form>
     </div>
 </nav>
-<section>
-    <form>
-        <ul id="book-list" class="list-group">
-            <li id="book-view" hidden ></li>
-        </ul>
-    </form>
+<section id="all">
+
+    <ul id="book-list" class="list-group">
+        <li id="book-view" hidden ></li>
+    </ul>
 </section>
 </body>
+<script>
+    $("#edit").change(() => {
+        $("#edit-form").toggle();
+    });
+</script>
+
 <script id="book-template" type="text/html">
     <ul class="list-group">
-        <li class="list-group-item">
-            <a href="#" class="nav-link dropdown-toggle"
-               id="navbarDropdown" role="button" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false">:bookName:</a>
+        <li class="list-group-item list-group-item-action" id="get-detail" >
+            <a href="#" id="show-detail" role="button" aria-expanded="false">:bookName:
+            </a>
+
+                <p>Author:    :bookAuthor:</p>
+                <p>Publisher: :bookPublisher:</p>
+                <p>Price:     :bookPrice:</p>
+                <p>Phone:     :publisherPhone:</p>
+            <a href="/detail/:id:" id="edit" class="btn btn-primary">Edit</a>
+            <button id="delete" class="btn btn-danger">Delete</button>
         </li>
     </ul>
 </script>

@@ -3,44 +3,31 @@ $(document).ready( function () {
     function renderBook(books) {
         let template = $('#book-template').html();
         let resultHTML = books.map(function (book) {
-            return template.replace(':bookName:', book.title).replace(':bookAuthor:', book.author);
+            return template.replace(':bookName:', book.title)
+                .replace(":bookAuthor:", book.author)
+                .replace(":bookPublisher:", book.publisher.name)
+                .replace(":bookPrice:", book.price)
+                .replace(":publisherPhone:", book.publisher.phone)
+                .replace(":id:", book.id);
         }).join('');
         $('#book-list').html(resultHTML);
     }
 
-    $("#get-all").click(()=>{
-        $.ajax("/books","GET").then(renderBook);
+    //load page home
+    $.ajax('/books').then(renderBook);
+
+    $(document).on("click", "#edit", function () {
+       $.ajax('/book/detail/:id').then(renderBook);
+        renderEdit();
     });
 
-    $("#get").click(() => {
-        $.ajax("/title", "GET",{
-            title: $("#title").val()
-        }).then(renderBook)
-    });
+    function renderEdit() {
+        let template = $('#book-edit').html();
+        $('#all').html(template);
+    }
 
-    $("#edit").click(() => {
-        $.ajax("/edit", "put", {
-            id          : $("#id").val(),
-            title       : $("#title").val(),
-            author      : $("#author").val(),
-            publisher_id: $("#publisher").val(),
-            price       : $('#price').val()
-        })
-    });
+    $("#publisher").change(function () {
 
-    $("#add").click(() => {
-        $.ajax('/save', 'post', {
-            title       : $("#title").val(),
-            author      : $("#author").val(),
-            publisher_id: $("#publisher").val(),
-            price       : $('#price').val()
-        })
-    });
-
-    $("#delete").click(() => {
-        $.ajax('/delete', 'delete', {
-                id: $("#id").val()
-        })
     });
 
     $('#search').change(() => {
@@ -56,5 +43,21 @@ $(document).ready( function () {
             publisher_id: $("#publisher").val()
         }).then(renderBook);
     });
+
+    $("#delete").change(() => {
+        $.ajax('/delete').then(renderBook)
+    });
+
+    $("#edit").click(() => {
+        $.ajax('book/:id',{
+            method: "put",
+            data: {
+                title: $("#title").val() ,
+                author: $("#author").val() ,
+                publisher: $("#publisher").val() ,
+                price: $("#price").val()
+            }
+        })
+    })
 });
 

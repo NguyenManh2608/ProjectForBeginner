@@ -63,6 +63,10 @@ class Publisher {
     getName(name) {
         return this.name;
     }
+
+    isSame(publisher) {
+        return this.getId() === publisher.getId();
+    }
 }
 
 module.exports = Publisher;

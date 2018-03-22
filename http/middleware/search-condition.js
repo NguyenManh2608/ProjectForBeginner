@@ -28,4 +28,10 @@ function makeCondition(request) {
     else if (request.path === '/title') {
         return new TitleSearchCondition(request.query.title);
     }
+    else if(request.path === '/book') {
+        return new UnDeletedSearchCondition();
+    }
+    else if(request.path.toString().startsWith('/detail')) {
+        return new IdSearchCondition(request.params.id);
+    }
 }
