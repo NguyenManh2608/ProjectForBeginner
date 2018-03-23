@@ -8,25 +8,17 @@ $(document).ready( function () {
                 .replace(":bookPublisher:", book.publisher.name)
                 .replace(":bookPrice:", book.price)
                 .replace(":publisherPhone:", book.publisher.phone)
-                .replace(":id:", book.id);
+                .replace(":id:", book.id)
+                .replace(":bookId:", book.id);
+
         }).join('');
         $('#book-list').html(resultHTML);
     }
 
     $.ajax('/books').then(renderBook);
 
-    $(document).on("click", "#edit", function () {
-       $.ajax('/book/detail/:id').then(renderBook);
-        renderEdit();
-    });
-
-    function renderEdit() {
-        let template = $('#book-edit').html();
-        $('#all').html(template);
-    }
-
     $('#search').submit(function (e) {
-       e.preventDefault();
+        e.preventDefault();
     });
 
     $('#input-search').keyup(function () {
@@ -38,22 +30,11 @@ $(document).ready( function () {
 
     $('#search-advance').change(() => {
         $.get('/search-advance', {
-            title       : $("#title").val(),
-            author      : $('#author').val(),
+            title: $("#title").val(),
+            author: $('#author').val(),
             publisher_id: $("#publisher").val()
         }).then(renderBook);
     });
-
-    $("#edit").click(() => {
-        $.ajax('book/:id',{
-            method: "put",
-            data: {
-                title: $("#title").val() ,
-                author: $("#author").val() ,
-                publisher: $("#publisher").val() ,
-                price: $("#price").val()
-            }
-        });
-    })
 });
+
 

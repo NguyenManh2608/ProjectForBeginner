@@ -16,7 +16,7 @@ class BookController {
     add(request, response, next) {
         let repo = request.app.get('books.repo');
         repo.add(request.book).then(books => {
-            response.render('save.njk', {book: books[0]});
+            response.render('create.njk', {book: books[0]});
         })
     .catch(next)
     }
@@ -25,7 +25,7 @@ class BookController {
         let repo = request.app.get('books.repo');
         repo.edit(request.book)
             .then(() => {
-                response.json({message:"Success"})
+                response.redirect('/')
             })
             .catch(next)
     }

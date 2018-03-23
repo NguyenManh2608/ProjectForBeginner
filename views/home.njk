@@ -18,10 +18,12 @@
 </section>
 <div class="container-fluid">
     <div class="col-md-6 col-md-offset-3">
+        <div class="panel-heading">
+            <h1> Books</h1>
+        </div>
         <div class="panel-body">
             <section id="all">
                 <ul id="book-list" class="list-group">
-                    <li id="book-view" hidden ></li>
                 </ul>
             </section>
             <script id="book-template" type="text/html">
@@ -33,12 +35,13 @@
                         <p>Publisher: :bookPublisher:</p>
                         <p>Price:     :bookPrice:</p>
                         <p>Phone:     :publisherPhone:</p>
-                        <a href="/detail/:id:" id="edit" class="btn btn-primary">Edit</a>
-                        <a href="/delete/:id" class="btn btn-danger">Delete</a>
+                        <a href="/detail/:id:" class="btn btn-primary">Edit</a>
+                        <a href="/delete/:bookId:" class="btn btn-danger">Delete</a>
                     </li>
                 </ul>
             </script>
         </div>
+
     </div>
 </div>
 {% endblock %}
