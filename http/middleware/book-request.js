@@ -7,7 +7,6 @@ module.exports = function (req, res, next) {
     .then( book => {
             book.setId(req.params.id);
             req.book = book;
-
         next();
         });
 };

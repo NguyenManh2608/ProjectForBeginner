@@ -37,4 +37,7 @@ function makeCondition(request) {
     else if(request.path.toString().startsWith('/delete')){
         return new IdSearchCondition(request.params.id)
     }
+    else if(request.path === '/create') {
+        return new UnDeletedSearchCondition();
+    }
 }

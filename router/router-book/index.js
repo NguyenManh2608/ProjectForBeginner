@@ -27,6 +27,8 @@ router.get('/save', check.searchCondition, bookController.renderEdit);
 
 router.post('/create', check.bookRequest, bookController.add);
 
+router.get('/create', bookController.getPublisher);
+
 router.post('/detail/:id', check.bookRequest, bookController.edit);
 
 router.get('/delete/:id', bookController.remove);

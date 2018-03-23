@@ -15,8 +15,8 @@ class BookController {
 
     add(request, response, next) {
         let repo = request.app.get('books.repo');
-        repo.add(request.book).then(books => {
-            response.render('create.njk', {book: books[0]});
+        repo.add(request.book).then(() => {
+            response.redirect('/');
         })
     .catch(next)
     }
@@ -44,6 +44,12 @@ class BookController {
         repo.remove(request.params.id).then(() => {
             response.redirect('/');
         }).catch(next);
+    }
+
+    getPublisher(request, response, next) {
+        request.app.get('publisher.provider').provideAll().then(publishers =>
+        response.render('create.njk', {publishers : publishers}))
+            .catch(next)
     }
 }
 

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,8 @@
     "dotenv": "^5.0.1",
     "ejs": "^2.5.7",
     "express": "*",
+    "hover": "^3.0.0-alpha.6",
+    "hover-nodejs": "^1.0.3",
     "jquery": "^3.3.1",
     "knex": "^0.14.4",
     "mysql": "*",
