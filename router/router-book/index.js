@@ -19,7 +19,7 @@ router.get('/books', check.searchCondition, bookController.search);
 
 router.get('/book', check.searchCondition, bookController.detail);
 
-router.get('/search-advance', check.searchCondition, bookController.search);
+router.get('/search', check.searchCondition, bookController.search);
 
 router.get('/search-basic', check.searchCondition, bookController.search);
 

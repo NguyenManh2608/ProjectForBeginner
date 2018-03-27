@@ -1,6 +1,4 @@
 class BookController {
-
-
     search(request, response, next) {
         request.app.get('books.searcher').search(request.condition)
             .then( books => response.json(books))
