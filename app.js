@@ -2,7 +2,7 @@ const path           = require('path');
 const bodyParser     = require('body-parser');
 const express        = require('express');
 const knex           = require('./database/knexConnection');
-const index          = require('./router/router-book/index');
+const index          = require('./router/router-book');
 const BookRepository = require('./src/book/book-repository');
 const BookFactory    = require('./src/book/book-factory');
 const Searcher       = require('./src/searching-service/searcher');
@@ -28,6 +28,6 @@ app.use(bodyParser.json());
 app.use(index);
 // app.use(router);
 
-app.listen(3000, () => {
-    console.log('sever running port 3000');
+app.listen(8080, () => {
+    console.log('sever running port 8080');
 });

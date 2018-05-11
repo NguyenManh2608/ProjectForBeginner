@@ -7,9 +7,8 @@ const router = express.Router();
 
 let bookController = new BookController();
 
-router.get('/', (req, res) => {
-   res.render('home.njk');
-});
+router.get('/test',bookController.search);
+
 router.get("/title", function (req, res, next) {
    req.condition = new TitleSearchCondition(req.query.title);
    next();
@@ -34,5 +33,17 @@ router.post('/detail/:id', check.bookRequest, bookController.edit);
 router.get('/delete/:id', bookController.remove);
 
 router.get('/detail/:id',check.searchCondition, bookController.renderEdit);
+
+router.get('/login', function (req, res) {
+    res.render('create.njk')
+});
+
+router.get('/company', function (req, res) {
+    res.render('home.njk')
+});
+
+router.get('/publishers', bookController.getPublishers);
+
+router.get('/create', check.bookRequest,bookController.create);
 
 module.exports = router;

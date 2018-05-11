@@ -49,6 +49,20 @@ class BookController {
         response.render('create.njk', {publishers : publishers}))
             .catch(next)
     }
+
+    getPublishers(request, response, next) {
+        request.app.get('publisher.provider').provideAll()
+            .then(publishers => response.json(publishers))
+                .catch(next)
+    }
+
+    create(request, response, next) {
+        let repo = request.app.get('books.repo');
+        repo.add(request.book).then(results => {
+            response.send(response.json(results));
+        })
+            .catch(next)
+    }
 }
 
 module.exports = BookController;

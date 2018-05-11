@@ -1,46 +1,133 @@
-{% extends 'layout.njk' %}
+<html>
+<head>
+    <title>Internship</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin-top: 50px;
+            background-color: #f9f9f9;
+        }
 
-{% block content %}
+        #navigator {
+            transition: opacity 500ms;
+            opacity: .7;
+        }
 
+        #navigator:hover {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-fixed-top navbar-default " id="navigator">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target="#collapsedList"
+                    aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar">ABC</span>
+                <span class="icon-bar">DCE</span>
+                <span class="icon-bar">EFD</span>
+            </button>
+            <a href="/" class="navbar-brand"> <span class="glyphicon glyphicon-home"> Home </span></a>
+        </div>
+        <div class="collapse navbar-collapse " id="collapsedList">
+            <ul class="navbar-nav nav navbar-right" style="margin-left: -5em">
+                <li id="Menu3"><a href="#" class="nav-link">Quản lý sản phẩm</a></li>
+                <li id="Menu4"><a href="#" class="nav-link">Khuyến mại</a></li>
+                <li id="Menu1"><a href="#" class="nav-link">Thông báo</a></li>
+                <li id="Menu2"><a href="#" class="nav-link">Trợ giúp</a></li>
+                <li id="Menu5"><a href="#" class="nav-link">Liên hệ</a></li>
+                <li id="Menu6"><a href="#" class="nav-link">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
 <section>
-    <div style="
-    margin-top: -50px;
-    background-image: url(https://www.bma.org.uk/~/asset/4/29766.ashx?format=8|10000);
-    -webkit-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    width: 100%;
-    height: 600px;
-" class="ih-item circle effect10 top_to_bottom">
-
-</div>
+    <form  class="navbar-form" id="search">
+        <div class="col-md-7 col-md-offset-3" style="margin-top: 100px">
+            <input id="inputSearch" type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-s"  placeholder="search..." style="width: 50em">
+            <i style="margin-left: -3em" class="btn glyphicon glyphicon-search"></i>
+        </div>
+    </form>
 </section>
 <div class="container-fluid">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-12">
         <div class="panel panel-default" style="margin-top: 32px">
             <div class="panel-heading">
                 <h1>
-                    Books
+                    Danh sách các công ty
                 </h1>
             </div>
             <div class="panel-body">
                 <section id="all">
-                    <ul id="book-list" class="list-group">
-                    </ul>
+                        <div class="container">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên Công ty</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Email  </th>
+                                    <th>Tên người phụ trách </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>SamSung</td>
+                                    <td>01444444444</td>
+                                    <td>Hà Nội</td>
+                                    <td>samsung@gmail.com</td>
+                                    <td>Nguyễn quốc hoàng</td>
+                                    <td><button type="button" class="btn btn-success">Edit </button></td>
+                                    <td><button type="button" class="btn btn-success">Delete  </button></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>VietTien </td>
+                                    <td>01444444444</td>
+                                    <td>Hà Nội</td>
+                                    <td>viettien@gmail.com</td>
+                                    <td>Nguyễn xuân mậu </td>
+                                    <td><button type="button" class="btn btn-success">Edit </button></td>
+                                    <td><button type="button" class="btn btn-success">Delete  </button></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Hoàng Sơn </td>
+                                    <td>0145456433344</td>
+                                    <td>Phú thọ </td>
+                                    <td>Hoangson@gmail.com</td>
+                                    <td>Trân văn cao</td>
+                                    <td><button type="button" class="btn btn-success">Edit </button></td>
+                                    <td><button type="button" class="btn btn-success">Delete  </button></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Tiến Bình </td>
+                                    <td>016432366664</td>
+                                    <td>Hà Nội</td>
+                                    <td>tienbinh@gmail.com</td>
+                                    <td>Vũ quang</td>
+                                    <td><button type="button" class="btn btn-success">Edit </button></td>
+                                    <td><button type="button" class="btn btn-success">Delete  </button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                 </section>
                 <script id="book-template" type="text/html">
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-action" id="get-detail" >
-                            <a href="#" id="show-detail" role="button" aria-expanded="false" class="progress">:bookName:
-                            </a>
-                            <p>Author:    :bookAuthor:</p>
-                            <p>Publisher: :bookPublisher:</p>
-                            <p>Price:     :bookPrice:</p>
-                            <p>Phone:     :publisherPhone:</p>
-                            <a href="/detail/:id:" class="btn btn-primary">Edit</a>
-                            <a href="/delete/:bookId:" class="btn btn-danger">Delete</a>
-                            <i class="fa fa-facebook"></i>
+
                         </li>
                     </ul>
                 </script>
@@ -48,5 +135,9 @@
         </div>
     </div>
 </div>
-{% endblock %}
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/javascript/script.js"></script>
+</html>

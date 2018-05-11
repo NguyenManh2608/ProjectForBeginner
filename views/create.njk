@@ -8,45 +8,32 @@ Create
 <section>
     <div class="container-fluid">
         <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-default" style="margin-top: 1em">
-                <div class="panel-heading">
-                    <h1>
-                        Create Book
-                    </h1>
-                </div>
-                <div class="panel-body">
-                    <form id="form-condition" method="post" action="/create">
-                        <div class="form-group">
-                            <label for="c-title">Title:</label>
-                            <input name="title" id="c-title" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="c-author">Author: </label>
-                            <input name="author" id="c-author" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="c-price">Price: </label>
-                            <input name="price" id="c-price" type="number"
-                                   class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="c-list-publisher">Publisher</label>
-                            <select class="form-control" id="c-list-publisher" name="publisher_id">
-                                {% for publisher in publishers %}
-                                <option value="{{publisher.getId()}}">
-                                    {{publisher.getName()}}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <button id="s-edit" class="btn btn-success btn-block">
-                                <i class="glyphicon glyphicon-send"></i>
-                                <span class="hidden-sm hidden-xs">Create</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                <div class="panel panel-default" style="margin-top: 1em">
+                    <div class="panel-heading">
+                        <h1>
+                            Login
+                        </h1>
+                    </div>
+                    <div class="panel-body">
+                        <form id="form-condition" method="post" action="/create">
+                            <div class="form-group">
+                                <label for="c-title">Tên tài khoản :</label>
+                                <input name="title" id="c-title" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="c-list-publisher">Mật khẩu :</label>
+                                <input name="title" id="c-title" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <button id="s-edit" class="btn btn-success btn-block">
+                                    <span class="hidden-sm hidden-xs">Đăng nhập</span>
+                                </button>
+                            </div><div class="form-group">
+                            <a hef="#">Quên mật khẩu</a>
+                            </div>
+                        </form>
+                    </div>
             </div>
         </div>
     </div>

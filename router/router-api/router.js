@@ -19,5 +19,8 @@ router.get('/search-advance', check.searchCondition, bookController.search);
 
 router.get('/search-basic', check.searchCondition, bookController.search);
 
+router.get('/login', function (req, res) {
+    res.render('create.njk')
+});
 
 module.exports = router;
