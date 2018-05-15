@@ -44,6 +44,7 @@ router.get('/company', function (req, res) {
 
 router.get('/publishers', bookController.getPublishers);
 
-router.get('/create', check.bookRequest,bookController.create);
+router.post('/book/create', check.bookRequest,bookController.create);
 
+router.post('/remove/:id', bookController.removeBook);
 module.exports = router;

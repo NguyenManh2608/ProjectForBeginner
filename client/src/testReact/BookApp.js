@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {addBook, getPublishers, loadBook} from "./actions";
+import {addBook, checkValue, deleteBook, getPublishers, loadBook, searchAdvance} from "./actions";
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -10,69 +10,98 @@ const mapDispatchToProps = dispatch => {
         addBook: (title, author, publisher_id, price) => {
           dispatch(addBook(title, author, publisher_id, price))
         },
-
+        deleteBook: (books) => {
+            dispatch(deleteBook(books));
+        },
+        checkValue: (id, check) => {
+            dispatch(checkValue(id, check));
+        },
+        searchAdvance :(keyword) => {
+            dispatch(searchAdvance(keyword));
+        },
         getPublishers: () => {
             dispatch(getPublishers());
         }
-
     }
 };
 
 const mapStateToProps = (state) => {
     return {
         books       : state.bookToReducer,
-        publishers  : state.publisherToReducer
+        publishers  : state.publisherToReducer,
     }
 };
 
 class BookApp extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.title = React.createRef();
-        this.author = React.createRef();
-        this.publisher = React.createRef();
-        this.price = React.createRef();
         this.state = {
             title: "",
             author: "",
-            publisher: "",
+            publishers: "",
             publisher_id: "",
-            price: null
-        }
+            keyword  : '',
+            price: null,
+            visible: false,
+        };
+        this.handleSubmit   = this.handleSubmit.bind(this);
+        this.logChange      = this.logChange.bind(this);
+        this.checkBoxChange = this.checkBoxChange.bind(this);
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this.props.loadBook();
         this.props.getPublishers();
     }
-
-    titleOnchange(e) {
-        this.setState({
-            title: e.currentTarget.value
-        });
+     // handle form log change
+    logChange(e) {
+        this.setState({[e.target.name] : e.target.value})
     }
 
-    authorOnchange(e) {
-        this.setState({
-            author: e.currentTarget.value
-        })
-    }
-
-    priceOnChange(e) {
-        this.setState({
-            price: e.currentTarget.price
-        })
-    }
-
-    submitSave(e) {
+    handleSubmit(e) {
         e.preventDefault();
-        this.props.addBook(this.title.current.value,     this.author.current.value,
-                           this.publisher.current.value, this.price.current.value);
+        this.props.addBook( this.state.title, this.state.author,
+                            this.state.publisher_id, this.state.price);
+    }
+
+    // Do search
+    searchAdvance(){
+        this.props.searchAdvance(this.state.value)
+    }
+
+    handleInputChange(e){
+        e.preventDefault();
+        this.setState({
+            keyword: this.state.value
+        })
+    }
+
+    //create checkbox to handle event of checkbox
+    checkBoxChange(e) {
+        this.props.checkValue(e.currentTarget.getAttribute('id'), e.currentTarget.checked)
+    }
+
+    //button delete
+    deleteClick(e){
+        e.preventDefault();
+        this.props.deleteBook(this.props.books);
     }
 
     render () {
         return (
             <div>
+                <br/>
+                <button onClick={this.deleteClick.bind(this)}>Delete</button>
+                <br/>
+                {/*Todo search advance at home*/}
+                {/*form use to search*/}
+                <form onChange={this.handleInputChange}>
+                    <input type="text" onChange={this.handleInputChange} ref={input => this.search = input}
+                           placeholder='Search....'/>
+                    <p>{this.state.keyword}</p>
+                    <input type='submit' onChange={this.searchAdvance.bind(this)}/>
+                </form>
+                {/*show list book*/}
                 <table>
                     <thead>
                         <tr>
@@ -85,31 +114,32 @@ class BookApp extends Component {
                         <tr key={index}>
                             <td>{book.title}</td>
                             <td>{book.author}</td>
-                            <td>{book.publisher.name}</td>
                             <td>{book.price}</td>
+                            <td>{book.publisher.name}</td>
+                            <td key={index}>
+                            <input onChange={this.checkBoxChange.bind(this)}
+                                   id={index} type='checkbox' checked={book.check}/>
+                            </td>
                         </tr>)}
                     </thead>
                 </table>
-                <form onSubmit={this.submitSave.bind(this)}>
-                    <label>
-                        Title :
-                    </label>
-                    <input ref={this.title} type="text" onChange={this.titleOnchange.bind(this)}/>
-                    <label>
-                        Author :
-                    </label>
-                    <input type='text' ref={this.author} onChange={this.authorOnchange.bind(this)}/>
-                    <label> Publisher:
-                    </label>
-                        <select>
-                            {this.props.publishers.map((publisher, index) => <option ref={this.publisher} value={publisher.id} key={index}>{publisher.name}</option>)}
+                <form onSubmit={this.handleSubmit}>
+                    <label>Title: </label>
+                    <input type="text" onChange={this.logChange} name='title'/>
+                    <label>Author: </label>
+                    <input type='text' onChange={this.logChange} name='author'/>
+                    <label> Publisher: </label>
+                        <select onChange={this.logChange} name='publisher_id'>
+                            {this.props.publishers.map((publisher, index) =>
+                                <option key={index} value={publisher.id} >{publisher.name}</option>)}
                         </select>
-                    <label>
-                        Price:
-                    </label>
-                    <input ref={this.price} type='text' onChange={this.priceOnChange.bind(this)}/>
+                    <label>Price:</label>
+                    <input type='text' onChange={this.logChange} name='price' />
                     <input type='submit'/>
                 </form>
+                <div>
+                    <p>This is a segment of page</p>
+                </div>
             </div>
         )
     }

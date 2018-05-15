@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import BookApp from "./testReact/BookApp";
+import LayoutWeb from "./testReact/layout";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-       <BookApp/>
+         <LayoutWeb/>
       </div>
     );
   }

@@ -13,8 +13,9 @@ class BookController {
 
     add(request, response, next) {
         let repo = request.app.get('books.repo');
-        repo.add(request.book).then(() => {
-            response.redirect('/');
+        repo.add(request.book).then(book => {
+            request.book.setId(book);
+            response.redirect(request.book);
         })
     .catch(next)
     }
@@ -59,10 +60,21 @@ class BookController {
     create(request, response, next) {
         let repo = request.app.get('books.repo');
         repo.add(request.book).then(results => {
-            response.send(response.json(results));
+            request.book.setId(results);
+            response.send(request.book);
         })
             .catch(next)
     }
+
+    removeBook(request, response, next) {
+        let repo = request.app.get('books.repo');
+        repo.remove(request.params.id).then( () => {
+            response.json({message:'Success'});
+        }).catch( (err) => {
+            next(err);
+        });
+    }
+
 }
 
 module.exports = BookController;
