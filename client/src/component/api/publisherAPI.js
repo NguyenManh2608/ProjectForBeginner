@@ -1,5 +1,5 @@
-import {GET_PUBLISHER, LOAD_PUBLISHER} from "./actions";
-import axios from "axios";
+import {GET_PUBLISHER, LOAD_PUBLISHER} from "../actions";
+import axios                           from "axios";
 
 export const publisherAPI = store=> next => action => {
     if(action.type === GET_PUBLISHER) {

@@ -1,4 +1,4 @@
-import {GET_PUBLISHER} from "./actions";
+import {GET_PUBLISHER} from "../actions";
 
 export function publisherToReducer(state = [], action) {
     if(action.type === GET_PUBLISHER) {

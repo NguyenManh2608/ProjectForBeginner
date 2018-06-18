@@ -1,4 +1,4 @@
-import {ADD_BOOK, LOAD_BOOK} from "./actions";
+import {ADD_BOOK, DELETE_BOOK, LOAD_BOOK} from "../actions";
 
 export function bookToReducer(state = [], action) {
     if(action.type === LOAD_BOOK) {
@@ -12,6 +12,9 @@ export function bookToReducer(state = [], action) {
             publisher_id: action.publisher_id,
             price    : action.price
         }]
+    }
+    if (action.type === DELETE_BOOK) {
+        return [...action.books];
     }
     return state;
 }
