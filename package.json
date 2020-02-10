@@ -14,7 +14,7 @@
     "dotenv": "^5.0.1",
     "ejs": "^2.5.7",
     "express": "*",
-    "knex": "^0.14.4",
+    "knex": "^0.20.9",
     "mysql": "*",
     "nunjucks": "^3.1.2",
     "semantic-ui": "^2.3.0"
